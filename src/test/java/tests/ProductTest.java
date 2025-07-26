@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.CartPage;
+import utils.WaitUtils;
 
 /**
  * Test class for Product browsing and cart functionality
@@ -51,15 +52,21 @@ public class ProductTest extends BaseTest {
         // Add first product to cart
         homePage.addFirstProductToCart();
         
-        // Wait a moment for cart to update
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+        // Enhanced wait for cart to update - wait for cart quantity to change
+        WaitUtils.waitForPageToBeReady(driver, 3);
         
-        // Verify cart quantity increased
-        int updatedCartQuantity = homePage.getCartQuantity();
+        // Verify cart quantity increased with retry logic
+        int updatedCartQuantity = -1;
+        int attempts = 0;
+        while (attempts < 5 && updatedCartQuantity <= initialCartQuantity) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            updatedCartQuantity = homePage.getCartQuantity();
+            attempts++;
+        }
         System.out.println("Updated cart quantity: " + updatedCartQuantity);
         Assert.assertTrue(updatedCartQuantity > initialCartQuantity, 
                          "Cart quantity should increase after adding product");

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="BrowserStack Selenium Test Suite" parallel="tests" thread-count="4" verbose="2">
+<suite name="BrowserStack Selenium Test Suite" parallel="tests" thread-count="5" verbose="2">
     
     <parameter name="environment" value="browserstack"/>
     
@@ -26,9 +26,9 @@
         </groups>
         
         <classes>
-            <class name="tests.LoginTest"/>
+            <class name="tests.CriticalLoginTest"/>
             <class name="tests.ProductTest"/>
-            <class name="tests.CheckoutTest"/>
+            <class name="tests.CriticalCheckoutEndToEndTest"/>
         </classes>
     </test>
     
@@ -45,25 +45,8 @@
         </groups>
         
         <classes>
-            <class name="tests.LoginTest"/>
+            <class name="tests.CriticalLoginTest"/>
             <class name="tests.ProductTest"/>
-        </classes>
-    </test>
-    
-    <!-- Safari Tests -->
-    <test name="Safari macOS Tests" group-by-instances="true">
-        <parameter name="browser" value="Safari"/>
-        <parameter name="os" value="OS X"/>
-        <parameter name="osVersion" value="Monterey"/>
-        
-        <groups>
-            <run>
-                <include name="smoke"/>
-            </run>
-        </groups>
-        
-        <classes>
-            <class name="tests.LoginTest"/>
         </classes>
     </test>
     

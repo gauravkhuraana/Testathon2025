@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Critical_Offers_Validation_Suite" parallel="tests" thread-count="2">
+    
+    <test name="Critical_Offers_Location_Allow_Chrome" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="offers"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalOffersValidationTest">
+                <methods>
+                    <include name="testOffersPageWithLocationAllow"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Critical_Offers_Location_Deny_Firefox" group-by-instances="true">
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="offers"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalOffersValidationTest">
+                <methods>
+                    <include name="testOffersPageWithLocationDeny"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Critical_Offers_CrossDevice_Safari" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Big Sur"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="cross-platform"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalOffersValidationTest">
+                <methods>
+                    <include name="testOffersPageCrossDeviceCompatibility"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Mobile Device Tests -->
+    <test name="Critical_Offers_Mobile_iPhone" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="device" value="iPhone 14"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="16"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="offers"/>
+                <include name="cross-platform"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalOffersValidationTest">
+                <methods>
+                    <include name="testOffersPageWithLocationAllow"/>
+                    <include name="testOffersPageCrossDeviceCompatibility"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Critical_Offers_Mobile_Android" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="device" value="Google Pixel 7"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="13.0"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="offers"/>
+                <include name="cross-platform"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalOffersValidationTest">
+                <methods>
+                    <include name="testOffersPageWithLocationDeny"/>
+                    <include name="testOffersPageCrossDeviceCompatibility"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+</suite>

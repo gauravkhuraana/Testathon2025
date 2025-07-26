@@ -115,18 +115,7 @@
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <environment>${environment}</environment>
-                        <browserstack.username>${env.BROWSERSTACK_USERNAME}</browserstack.username>
-                        <browserstack.accesskey>${env.BROWSERSTACK_ACCESS_KEY}</browserstack.accesskey>
                     </systemPropertyVariables>
-                    <environmentVariables>
-                        <BROWSERSTACK_USERNAME>${env.BROWSERSTACK_USERNAME}</BROWSERSTACK_USERNAME>
-                        <BROWSERSTACK_ACCESS_KEY>${env.BROWSERSTACK_ACCESS_KEY}</BROWSERSTACK_ACCESS_KEY>
-                    </environmentVariables>
-                    <argLine>
-                        -javaagent:${com.browserstack:browserstack-java-sdk:jar}
-                        -Dbrowserstack.username=${env.BROWSERSTACK_USERNAME}
-                        -Dbrowserstack.accesskey=${env.BROWSERSTACK_ACCESS_KEY}
-                    </argLine>
                 </configuration>
             </plugin>
         </plugins>
@@ -140,6 +129,30 @@
                 <environment>browserstack</environment>
                 <testng.suite.file>src/test/resources/testng.xml</testng.suite.file>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <environment>${environment}</environment>
+                                <browserstack.username>${env.BROWSERSTACK_USERNAME}</browserstack.username>
+                                <browserstack.accesskey>${env.BROWSERSTACK_ACCESS_KEY}</browserstack.accesskey>
+                            </systemPropertyVariables>
+                            <environmentVariables>
+                                <BROWSERSTACK_USERNAME>${env.BROWSERSTACK_USERNAME}</BROWSERSTACK_USERNAME>
+                                <BROWSERSTACK_ACCESS_KEY>${env.BROWSERSTACK_ACCESS_KEY}</BROWSERSTACK_ACCESS_KEY>
+                            </environmentVariables>
+                            <argLine>
+                                -javaagent:${com.browserstack:browserstack-java-sdk:jar}
+                                -Dbrowserstack.username=${env.BROWSERSTACK_USERNAME}
+                                -Dbrowserstack.accesskey=${env.BROWSERSTACK_ACCESS_KEY}
+                            </argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
 
         <!-- Profile for local execution -->

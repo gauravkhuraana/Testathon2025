@@ -44,23 +44,24 @@ public class LoginPage extends BasePage {
     
     @Override
     public boolean isPageLoaded() {
-        return SeleniumUtils.isElementVisible(driver, usernameDropdownLocator) &&
-               SeleniumUtils.isElementVisible(driver, passwordDropdownLocator) &&
-               SeleniumUtils.isElementVisible(driver, loginButtonLocator);
+        // Wait for all critical login elements to be displayed
+        return verifyElementDisplayed(usernameDropdownLocator) &&
+               verifyElementDisplayed(passwordDropdownLocator) &&
+               verifyElementDisplayed(loginButtonLocator);
     }
     
     /**
      * Click username dropdown to open options
      */
     public void clickUsernameDropdown() {
-        SeleniumUtils.safeClick(driver, usernameDropdownLocator);
+        safeClickWithWait(By.xpath("//div[@id='username']//svg"));
     }
     
     /**
      * Click password dropdown to open options  
      */
     public void clickPasswordDropdown() {
-        SeleniumUtils.safeClick(driver, passwordDropdownLocator);
+        safeClickWithWait(By.xpath("//div[@id='password']//svg"));
     }
     
     /**
@@ -68,8 +69,9 @@ public class LoginPage extends BasePage {
      */
     public void selectUsername(String username) {
         clickUsernameDropdown();
-        SeleniumUtils.waitForElementVisible(driver, By.xpath("//div[text()='" + username + "']"));
-        SeleniumUtils.safeClick(driver, By.xpath("//div[text()='" + username + "']"));
+        By usernameOptionLocator = By.xpath("//div[text()='" + username + "']");
+        waitForElementDisplayed(usernameOptionLocator);
+        safeClickWithWait(usernameOptionLocator);
     }
     
     /**
@@ -77,8 +79,8 @@ public class LoginPage extends BasePage {
      */
     public void selectPassword() {
         clickPasswordDropdown();
-        SeleniumUtils.waitForElementVisible(driver, passwordOptionLocator);
-        SeleniumUtils.safeClick(driver, passwordOptionLocator);
+        waitForElementDisplayed(passwordOptionLocator);
+        safeClickWithWait(passwordOptionLocator);
     }
     
     /**

@@ -1,0 +1,36 @@
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd"&gt;
+
+&lt;!-- TestNG configuration for existing_orders_user validation tests --&gt;
+&lt;suite name="ExistingOrdersUserValidationSuite" verbose="1" parallel="false"&gt;
+    
+    &lt;!-- Test parameters --&gt;
+    &lt;parameter name="browser" value="chrome"/&gt;
+    &lt;parameter name="environment" value="browserstack"/&gt;
+    
+    &lt;!-- Listeners for reporting --&gt;
+    &lt;listeners&gt;
+        &lt;listener class-name="utils.ExtentReportListener"/&gt;
+        &lt;listener class-name="utils.ScreenshotTestListener"/&gt;
+    &lt;/listeners&gt;
+    
+    &lt;!-- Critical Orders Tests --&gt;
+    &lt;test name="ExistingOrdersUserValidation" preserve-order="true"&gt;
+        &lt;groups&gt;
+            &lt;run&gt;
+                &lt;include name="critical"/&gt;
+                &lt;include name="orders"/&gt;
+            &lt;/run&gt;
+        &lt;/groups&gt;
+        
+        &lt;classes&gt;
+            &lt;class name="tests.ExistingOrdersUserValidationTest"&gt;
+                &lt;methods&gt;
+                    &lt;include name="testExistingOrdersUserOrdersPageValidation"/&gt;
+                    &lt;include name="testOrdersPageIssueDetection"/&gt;
+                &lt;/methods&gt;
+            &lt;/class&gt;
+        &lt;/classes&gt;
+    &lt;/test&gt;
+    
+&lt;/suite&gt;

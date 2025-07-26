@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Critical Checkout End-to-End Test Suite" parallel="tests" thread-count="2">
+    
+    <!-- CRITICAL End-to-End Checkout Tests for Cross-Browser Compatibility -->
+    <test name="Critical_Complete_Purchase_Flow_Chrome_Windows">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalCheckoutEndToEndTest">
+                <methods>
+                    <include name="testCompletePurchaseFlow"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical_Cross_Device_Checkout_Firefox_Windows">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalCheckoutEndToEndTest">
+                <methods>
+                    <include name="testCrossDeviceCheckoutCompatibility"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical_High_Value_Cart_Safari_MacOS">
+        <parameter name="browser" value="safari"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Monterey"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalCheckoutEndToEndTest">
+                <methods>
+                    <include name="testHighValueCartCheckout"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Mobile Browser Tests for Checkout Compatibility -->
+    <test name="Critical_Mobile_Purchase_Flow_Chrome_Android">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="12.0"/>
+        <parameter name="device" value="Samsung Galaxy S22"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalCheckoutEndToEndTest">
+                <methods>
+                    <include name="testCompletePurchaseFlow"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Critical_Mobile_Cross_Device_Safari_iOS">
+        <parameter name="browser" value="safari"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="16"/>
+        <parameter name="device" value="iPhone 14"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalCheckoutEndToEndTest">
+                <methods>
+                    <include name="testCrossDeviceCheckoutCompatibility"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Edge Browser Test for Compatibility -->
+    <test name="Critical_High_Value_Edge_Windows">
+        <parameter name="browser" value="edge"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <groups>
+            <run>
+                <include name="critical"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.CriticalCheckoutEndToEndTest">
+                <methods>
+                    <include name="testHighValueCartCheckout"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

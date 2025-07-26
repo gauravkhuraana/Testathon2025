@@ -18,13 +18,13 @@ public abstract class BaseTest {
     
     @BeforeSuite(alwaysRun = true)
     public void suiteSetup() {
-        // Initialize BrowserStack SDK configuration for Test Observability
-        BrowserStackSDKConfig.initialize();
-        
-        // Verify BrowserStack credentials if running on BrowserStack
+        // Initialize BrowserStack SDK configuration for Test Observability only if using BrowserStack
         String environment = System.getProperty("environment", "local");
         if ("browserstack".equalsIgnoreCase(environment)) {
+            BrowserStackSDKConfig.initialize();
             BrowserStackSDKConfig.verifyCredentials();
+        } else {
+            System.out.println("Running in local environment - skipping BrowserStack SDK initialization");
         }
     }
     
@@ -42,7 +42,7 @@ public abstract class BaseTest {
         System.out.println("Setting up test with Browser: '" + this.browser + "', OS: '" + this.os + "', OSVersion: '" + this.osVersion + "'");
         
         // Create WebDriver instance
-        this.driver = WebDriverFactory.createDriver(browser, os, osVersion);
+        this.driver = WebDriverFactory.createDriver(this.browser, this.os, this.osVersion);
         
         // Navigate to application URL
         String appUrl = ConfigManager.getAppUrl();

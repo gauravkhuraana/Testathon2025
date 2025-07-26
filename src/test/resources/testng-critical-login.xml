@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Critical Login Test Suite" parallel="tests" thread-count="4">
+    
+    <test name="Critical Login Tests - Chrome Windows">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.CriticalLoginTest"/>
+        </classes>
+    </test>
+    
+    <test name="Critical Login Tests - Firefox Windows">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.CriticalLoginTest"/>
+        </classes>
+    </test>
+    
+    <test name="Critical Login Tests - Safari Mac">
+        <parameter name="browser" value="safari"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Sonoma"/>
+        <classes>
+            <class name="tests.CriticalLoginTest"/>
+        </classes>
+    </test>
+    
+    <test name="Critical Login Tests - Edge Windows">
+        <parameter name="browser" value="edge"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.CriticalLoginTest"/>
+        </classes>
+    </test>
+    
+    <!-- Mobile Testing -->
+    <test name="Critical Login Tests - Mobile Chrome Android">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="12.0"/>
+        <parameter name="device" value="Google Pixel 6"/>
+        <classes>
+            <class name="tests.CriticalLoginTest"/>
+        </classes>
+    </test>
+    
+    <test name="Critical Login Tests - Mobile Safari iOS">
+        <parameter name="browser" value="safari"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="16"/>
+        <parameter name="device" value="iPhone 14"/>
+        <classes>
+            <class name="tests.CriticalLoginTest"/>
+        </classes>
+    </test>
+    
+</suite>

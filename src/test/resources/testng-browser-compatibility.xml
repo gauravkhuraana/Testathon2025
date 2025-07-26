@@ -11,7 +11,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -25,7 +25,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -39,7 +39,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -53,7 +53,7 @@
         <parameter name="os" value="OS X"/>
         <parameter name="osVersion" value="Big Sur"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>

@@ -17,9 +17,9 @@
         </groups>
         
         <classes>
-            <class name="tests.LoginTest"/>
+            <class name="tests.CriticalLoginTest"/>
             <class name="tests.ProductTest"/>
-            <class name="tests.CheckoutTest"/>
+            <class name="tests.CriticalCheckoutEndToEndTest"/>
         </classes>
     </test>
     

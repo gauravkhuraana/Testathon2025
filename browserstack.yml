@@ -4,23 +4,15 @@ accessKey: ${BROWSERSTACK_ACCESS_KEY}
 framework: testng
 
 platforms:
-  # Desktop Windows Configurations
+  # Desktop Windows Configurations Only - Optimized for 5 parallel executions
   - os: Windows
     osVersion: 11
     browser: Chrome
     browserVersion: latest
   - os: Windows
     osVersion: 11
-    browser: Chrome
-    browserVersion: 120
-  - os: Windows
-    osVersion: 11
     browser: Firefox
     browserVersion: latest
-  - os: Windows
-    osVersion: 11
-    browser: Firefox
-    browserVersion: 121
   - os: Windows
     osVersion: 11
     browser: Edge
@@ -33,124 +25,6 @@ platforms:
     osVersion: 10
     browser: Firefox
     browserVersion: latest
-  - os: Windows
-    osVersion: 10
-    browser: Edge
-    browserVersion: latest
-
-  # macOS Desktop Configurations
-  - os: OS X
-    osVersion: Monterey
-    browser: Safari
-    browserVersion: latest
-  - os: OS X
-    osVersion: Monterey
-    browser: Chrome
-    browserVersion: latest
-  - os: OS X
-    osVersion: Monterey
-    browser: Firefox
-    browserVersion: latest
-  - os: OS X
-    osVersion: Big Sur
-    browser: Safari
-    browserVersion: 15
-  - os: OS X
-    osVersion: Big Sur
-    browser: Chrome
-    browserVersion: latest
-  - os: OS X
-    osVersion: Ventura
-    browser: Safari
-    browserVersion: latest
-  - os: OS X
-    osVersion: Ventura
-    browser: Chrome
-    browserVersion: latest
-
-  # Android Mobile Devices
-  - device: Samsung Galaxy S23
-    os: android
-    osVersion: 13.0
-    browser: Chrome
-  - device: Samsung Galaxy S23
-    os: android
-    osVersion: 13.0
-    browser: Samsung Browser
-  - device: Samsung Galaxy S22
-    os: android
-    osVersion: 12.0
-    browser: Chrome
-  - device: Google Pixel 7
-    os: android
-    osVersion: 13.0
-    browser: Chrome
-  - device: Google Pixel 6
-    os: android
-    osVersion: 12.0
-    browser: Chrome
-  - device: OnePlus 9
-    os: android
-    osVersion: 11.0
-    browser: Chrome
-  - device: Xiaomi Redmi Note 11
-    os: android
-    osVersion: 11.0
-    browser: Chrome
-
-  # iOS Mobile Devices
-  - device: iPhone 14 Pro Max
-    os: ios
-    osVersion: 16
-    browser: Safari
-  - device: iPhone 14
-    os: ios
-    osVersion: 16
-    browser: Safari
-  - device: iPhone 13
-    os: ios
-    osVersion: 15
-    browser: Safari
-  - device: iPhone 12
-    os: ios
-    osVersion: 14
-    browser: Safari
-  - device: iPhone SE 2022
-    os: ios
-    osVersion: 15
-    browser: Safari
-
-  # Android Tablets
-  - device: Samsung Galaxy Tab S8
-    os: android
-    osVersion: 12.0
-    browser: Chrome
-  - device: Samsung Galaxy Tab S7
-    os: android
-    osVersion: 11.0
-    browser: Chrome
-  - device: Google Pixel Tablet
-    os: android
-    osVersion: 13.0
-    browser: Chrome
-
-  # iPad Tablets
-  - device: iPad Pro 12.9 2022
-    os: ios
-    osVersion: 16
-    browser: Safari
-  - device: iPad Air 5
-    os: ios
-    osVersion: 15
-    browser: Safari
-  - device: iPad 9th
-    os: ios
-    osVersion: 15
-    browser: Safari
-  - device: iPad Mini 6
-    os: ios
-    osVersion: 15
-    browser: Safari
 
 parallelsPerPlatform: 1
 

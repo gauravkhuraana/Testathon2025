@@ -45,8 +45,8 @@ public class CartPage extends BasePage {
     
     @Override
     public boolean isPageLoaded() {
-        return SeleniumUtils.isElementVisible(driver, cartContainerLocator) ||
-               SeleniumUtils.isElementVisible(driver, emptyCartLocator);
+        // Wait for cart container or empty cart message to be displayed
+        return waitForAnyElementDisplayed(cartContainerLocator, emptyCartLocator) != null;
     }
     
     /**
@@ -56,7 +56,7 @@ public class CartPage extends BasePage {
         if (isCartEmpty()) {
             return 0;
         }
-        SeleniumUtils.waitForElementVisible(driver, cartContainerLocator);
+        waitForElementDisplayed(cartContainerLocator);
         return cartItems.size();
     }
     
@@ -64,7 +64,7 @@ public class CartPage extends BasePage {
      * Check if cart is empty
      */
     public boolean isCartEmpty() {
-        return SeleniumUtils.isElementVisible(driver, emptyCartLocator);
+        return verifyElementDisplayed(emptyCartLocator);
     }
     
     /**
@@ -82,6 +82,7 @@ public class CartPage extends BasePage {
      */
     public String getSubtotal() {
         if (!isCartEmpty()) {
+            waitForElementDisplayed(subtotalLocator);
             return SeleniumUtils.getTextSafely(driver, subtotalLocator);
         }
         return "0";
@@ -92,7 +93,7 @@ public class CartPage extends BasePage {
      */
     public void clickCheckout() {
         if (!isCartEmpty()) {
-            SeleniumUtils.safeClick(driver, checkoutButtonLocator);
+            safeClickWithWait(checkoutButtonLocator);
         } else {
             throw new RuntimeException("Cannot checkout with empty cart");
         }
@@ -103,6 +104,8 @@ public class CartPage extends BasePage {
      */
     public void removeFirstItem() {
         if (!isCartEmpty() && !removeButtons.isEmpty()) {
+            // Wait for remove button to be clickable
+            SeleniumUtils.waitForElementClickable(driver, By.className("shelf-item__del"));
             removeButtons.get(0).click();
         }
     }

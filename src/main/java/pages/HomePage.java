@@ -42,22 +42,24 @@ public class HomePage extends BasePage {
     
     @Override
     public boolean isPageLoaded() {
-        return SeleniumUtils.isElementVisible(driver, vendorFiltersLocator) ||
-               SeleniumUtils.isElementVisible(driver, productGridLocator);
+        // Wait for page to load and verify critical elements are displayed
+        SeleniumUtils.waitForPageLoad(driver);
+        return verifyElementDisplayed(vendorFiltersLocator) || 
+               verifyElementDisplayed(productGridLocator);
     }
     
     /**
      * Check if home page is displayed
      */
     public boolean isHomePageDisplayed() {
-        return isPageLoaded();
+        return waitForAnyElementDisplayed(vendorFiltersLocator, productGridLocator) != null;
     }
     
     /**
      * Click Sign In button
      */
     public void clickSignIn() {
-        SeleniumUtils.safeClick(driver, signInButtonLocator);
+        safeClickWithWait(signInButtonLocator);
     }
     
     /**
@@ -84,15 +86,15 @@ public class HomePage extends BasePage {
      */
     public void clickProductByName(String productName) {
         By productLocator = By.xpath(String.format("//p[contains(text(), '%s')]", productName));
-        SeleniumUtils.safeClick(driver, productLocator);
+        safeClickWithWait(productLocator);
     }
     
     /**
      * Add first product to cart
      */
     public void addFirstProductToCart() {
-        SeleniumUtils.waitForElementVisible(driver, addToCartButtonLocator);
-        SeleniumUtils.safeClick(driver, addToCartButtonLocator);
+        waitForElementDisplayed(addToCartButtonLocator);
+        safeClickWithWait(addToCartButtonLocator);
     }
     
     /**
@@ -100,7 +102,7 @@ public class HomePage extends BasePage {
      */
     public void addProductToCartBySku(String sku) {
         By productLocator = By.cssSelector(String.format("[data-sku='%s'] .shelf-item__buy-btn", sku));
-        SeleniumUtils.safeClick(driver, productLocator);
+        safeClickWithWait(productLocator);
     }
     
     /**
@@ -118,7 +120,7 @@ public class HomePage extends BasePage {
      * Click cart icon
      */
     public void clickCart() {
-        SeleniumUtils.safeClick(driver, By.className("bag"));
+        safeClickWithWait(By.className("bag"));
     }
     
     /**
@@ -126,7 +128,7 @@ public class HomePage extends BasePage {
      */
     public boolean isProductDisplayed(String productName) {
         By productLocator = By.xpath(String.format("//p[@class='shelf-item__title' and contains(text(), '%s')]", productName));
-        return SeleniumUtils.isElementVisible(driver, productLocator);
+        return verifyElementDisplayed(productLocator);
     }
     
     /**
@@ -134,6 +136,7 @@ public class HomePage extends BasePage {
      */
     public String getProductPrice(String productName) {
         By priceLocator = By.xpath(String.format("//p[@class='shelf-item__title' and contains(text(), '%s')]/following-sibling::div[@class='val']//b", productName));
+        waitForElementDisplayed(priceLocator);
         return SeleniumUtils.getTextSafely(driver, priceLocator);
     }
     
@@ -142,8 +145,8 @@ public class HomePage extends BasePage {
      */
     public void applyFilter(String filterType) {
         By filterLocator = By.xpath(String.format("//span[contains(text(), '%s')]", filterType));
-        if (SeleniumUtils.isElementVisible(driver, filterLocator)) {
-            SeleniumUtils.safeClick(driver, filterLocator);
+        if (verifyElementDisplayed(filterLocator)) {
+            safeClickWithWait(filterLocator);
         }
     }
     
@@ -161,5 +164,50 @@ public class HomePage extends BasePage {
      */
     public String getHomePageTitle() {
         return getPageTitle();
+    }
+    
+    /**
+     * Navigate to Offers page
+     */
+    public void navigateToOffers() {
+        By offersLinkLocator = By.linkText("Offers");
+        if (SeleniumUtils.isElementVisible(driver, offersLinkLocator)) {
+            SeleniumUtils.safeClick(driver, offersLinkLocator);
+        } else {
+            System.out.println("Offers link not visible - user may not be logged in");
+        }
+    }
+    
+    /**
+     * Navigate to Orders page
+     */
+    public void navigateToOrders() {
+        By ordersLinkLocator = By.linkText("Orders");
+        if (SeleniumUtils.isElementVisible(driver, ordersLinkLocator)) {
+            SeleniumUtils.safeClick(driver, ordersLinkLocator);
+        } else {
+            System.out.println("Orders link not visible - user may not be logged in");
+        }
+    }
+    
+    /**
+     * Navigate to Favourites page
+     */
+    public void navigateToFavourites() {
+        By favouritesLinkLocator = By.linkText("Favourites");
+        if (SeleniumUtils.isElementVisible(driver, favouritesLinkLocator)) {
+            SeleniumUtils.safeClick(driver, favouritesLinkLocator);
+        } else {
+            System.out.println("Favourites link not visible - user may not be logged in");
+        }
+    }
+    
+    /**
+     * Check if navigation links are visible after login
+     */
+    public boolean areNavigationLinksVisible() {
+        return SeleniumUtils.isElementVisible(driver, By.linkText("Offers")) &&
+               SeleniumUtils.isElementVisible(driver, By.linkText("Orders")) &&
+               SeleniumUtils.isElementVisible(driver, By.linkText("Favourites"));
     }
 }

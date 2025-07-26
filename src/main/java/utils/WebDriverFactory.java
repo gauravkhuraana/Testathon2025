@@ -117,7 +117,14 @@ public class WebDriverFactory {
         caps.setCapability("bstack:options", bstackOptions);
         
         try {
-            return new RemoteWebDriver(new URL(ConfigManager.getBrowserStackHubUrl()), caps);
+            // Construct the URL with credentials
+            String bsUsername = ConfigManager.getBrowserStackUsername();
+            String bsAccessKey = ConfigManager.getBrowserStackAccessKey();
+            String hubUrl = String.format("https://%s:%s@hub-cloud.browserstack.com/wd/hub", bsUsername, bsAccessKey);
+            
+            System.out.println("Connecting to BrowserStack with URL: " + hubUrl.replaceAll(bsAccessKey, "***"));
+            
+            return new RemoteWebDriver(new URL(hubUrl), caps);
         } catch (MalformedURLException e) {
             throw new RuntimeException("Invalid BrowserStack URL: " + e.getMessage());
         }

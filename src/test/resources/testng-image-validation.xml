@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Image Loading Validation Test Suite" parallel="false" thread-count="1">
+    
+    <!-- Image Loading Validation Tests for image_not_loading_user -->
+    <test name="Image_Loading_Validation_Chrome_Windows">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <groups>
+            <run>
+                <include name="image_validation"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.ImageLoadingValidationTest"/>
+        </classes>
+    </test>
+    
+    <!-- Alternative browser test for comparison -->
+    <test name="Image_Loading_Validation_Firefox_Windows">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <groups>
+            <run>
+                <include name="image_validation"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.ImageLoadingValidationTest">
+                <methods>
+                    <include name="testImageLoadingOnHomePage"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

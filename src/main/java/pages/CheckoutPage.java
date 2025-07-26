@@ -76,50 +76,49 @@ public class CheckoutPage extends BasePage {
     
     @Override
     public boolean isPageLoaded() {
-        return SeleniumUtils.isElementVisible(driver, firstNameLocator) ||
-               SeleniumUtils.isElementVisible(driver, creditCardLocator) ||
-               SeleniumUtils.isElementVisible(driver, confirmOrderLocator);
+        // Wait for any checkout stage to be visible
+        return waitForAnyElementDisplayed(firstNameLocator, creditCardLocator, confirmOrderLocator) != null;
     }
     
     /**
      * Fill shipping information
      */
     public void fillShippingInformation(String firstName, String lastName, String address, String state, String postalCode) {
-        SeleniumUtils.safeSendKeys(driver, firstNameLocator, firstName);
-        SeleniumUtils.safeSendKeys(driver, lastNameLocator, lastName);
-        SeleniumUtils.safeSendKeys(driver, addressLocator, address);
-        SeleniumUtils.safeSendKeys(driver, stateLocator, state);
-        SeleniumUtils.safeSendKeys(driver, postalCodeLocator, postalCode);
+        safeSendKeysWithWait(firstNameLocator, firstName);
+        safeSendKeysWithWait(lastNameLocator, lastName);
+        safeSendKeysWithWait(addressLocator, address);
+        safeSendKeysWithWait(stateLocator, state);
+        safeSendKeysWithWait(postalCodeLocator, postalCode);
     }
     
     /**
      * Continue to payment from shipping
      */
     public void continueToPayment() {
-        SeleniumUtils.safeClick(driver, continueShippingLocator);
+        safeClickWithWait(continueShippingLocator);
     }
     
     /**
      * Fill payment information
      */
     public void fillPaymentInformation(String cardNumber, String expiryDate, String cvv) {
-        SeleniumUtils.safeSendKeys(driver, creditCardLocator, cardNumber);
-        SeleniumUtils.safeSendKeys(driver, expiryDateLocator, expiryDate);
-        SeleniumUtils.safeSendKeys(driver, cvvLocator, cvv);
+        safeSendKeysWithWait(creditCardLocator, cardNumber);
+        safeSendKeysWithWait(expiryDateLocator, expiryDate);
+        safeSendKeysWithWait(cvvLocator, cvv);
     }
     
     /**
      * Continue to confirmation from payment
      */
     public void continueToConfirmation() {
-        SeleniumUtils.safeClick(driver, continuePaymentLocator);
+        safeClickWithWait(continuePaymentLocator);
     }
     
     /**
      * Confirm order
      */
     public void confirmOrder() {
-        SeleniumUtils.safeClick(driver, confirmOrderLocator);
+        safeClickWithWait(confirmOrderLocator);
     }
     
     /**
@@ -128,13 +127,13 @@ public class CheckoutPage extends BasePage {
     public void completeCheckout(String firstName, String lastName, String address, String state, String postalCode,
                                 String cardNumber, String expiryDate, String cvv) {
         // Fill shipping information
-        if (SeleniumUtils.isElementVisible(driver, firstNameLocator)) {
+        if (verifyElementDisplayed(firstNameLocator)) {
             fillShippingInformation(firstName, lastName, address, state, postalCode);
             continueToPayment();
         }
         
         // Fill payment information
-        if (SeleniumUtils.isElementVisible(driver, creditCardLocator)) {
+        if (verifyElementDisplayed(creditCardLocator)) {
             fillPaymentInformation(cardNumber, expiryDate, cvv);
             continueToConfirmation();
         }

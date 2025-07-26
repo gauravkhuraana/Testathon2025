@@ -100,10 +100,18 @@ public class SeleniumUtils {
      * Check if element is present without throwing exception
      */
     public static boolean isElementPresent(WebDriver driver, By locator) {
+        return isElementPresent(driver, locator, 5); // Default 5 second timeout
+    }
+    
+    /**
+     * Check if element is present with explicit wait timeout
+     */
+    public static boolean isElementPresent(WebDriver driver, By locator, int timeoutSeconds) {
         try {
-            driver.findElement(locator);
-            return true;
-        } catch (NoSuchElementException e) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+            WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+            return element != null;
+        } catch (TimeoutException | NoSuchElementException e) {
             return false;
         }
     }
@@ -112,10 +120,18 @@ public class SeleniumUtils {
      * Check if element is visible without throwing exception
      */
     public static boolean isElementVisible(WebDriver driver, By locator) {
+        return isElementVisible(driver, locator, 5); // Default 5 second timeout
+    }
+    
+    /**
+     * Check if element is visible with explicit wait timeout
+     */
+    public static boolean isElementVisible(WebDriver driver, By locator, int timeoutSeconds) {
         try {
-            WebElement element = driver.findElement(locator);
-            return element.isDisplayed();
-        } catch (NoSuchElementException e) {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return element != null && element.isDisplayed();
+        } catch (TimeoutException | NoSuchElementException e) {
             return false;
         }
     }
@@ -199,6 +215,108 @@ public class SeleniumUtils {
                 break;
             }
         }
+    }
+    
+    /**
+     * Wait for element to disappear (become invisible or not present)
+     */
+    public static boolean waitForElementToDisappear(WebDriver driver, By locator, int timeoutSeconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+            return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        } catch (Exception e) {
+            return true; // Element already not visible
+        }
+    }
+    
+    /**
+     * Wait for element to disappear with default timeout
+     */
+    public static boolean waitForElementToDisappear(WebDriver driver, By locator) {
+        return waitForElementToDisappear(driver, locator, DEFAULT_TIMEOUT);
+    }
+    
+    /**
+     * Wait for element to be displayed (visible and enabled)
+     */
+    public static boolean waitForElementToBeDisplayed(WebDriver driver, By locator) {
+        return waitForElementToBeDisplayed(driver, locator, DEFAULT_TIMEOUT);
+    }
+    
+    /**
+     * Wait for element to be displayed with custom timeout
+     */
+    public static boolean waitForElementToBeDisplayed(WebDriver driver, By locator, int timeoutSeconds) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+            return wait.until(ExpectedConditions.and(
+                ExpectedConditions.visibilityOfElementLocated(locator),
+                ExpectedConditions.elementToBeClickable(locator)
+            )) != null;
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+    
+    /**
+     * Wait for any of multiple elements to be visible
+     */
+    public static WebElement waitForAnyElementVisible(WebDriver driver, By... locators) {
+        return waitForAnyElementVisible(driver, DEFAULT_TIMEOUT, locators);
+    }
+    
+    /**
+     * Wait for any of multiple elements to be visible with custom timeout
+     */
+    public static WebElement waitForAnyElementVisible(WebDriver driver, int timeoutSeconds, By... locators) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+            for (By locator : locators) {
+                try {
+                    return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+                } catch (TimeoutException e) {
+                    // Continue to next locator
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error waiting for any element to be visible: " + e.getMessage());
+        }
+        return null;
+    }
+    
+    /**
+     * Smart wait for element that handles stale element references
+     */
+    public static WebElement smartWaitForElement(WebDriver driver, By locator) {
+        return smartWaitForElement(driver, locator, DEFAULT_TIMEOUT);
+    }
+    
+    /**
+     * Smart wait for element with retry logic for stale elements
+     */
+    public static WebElement smartWaitForElement(WebDriver driver, By locator, int timeoutSeconds) {
+        int attempts = 0;
+        int maxAttempts = 3;
+        
+        while (attempts < maxAttempts) {
+            try {
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+                return wait.until(ExpectedConditions.refreshed(
+                    ExpectedConditions.visibilityOfElementLocated(locator)
+                ));
+            } catch (StaleElementReferenceException e) {
+                attempts++;
+                System.out.println("Stale element detected, retrying... Attempt: " + attempts);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                }
+            } catch (TimeoutException e) {
+                break;
+            }
+        }
+        return null;
     }
     
     /**

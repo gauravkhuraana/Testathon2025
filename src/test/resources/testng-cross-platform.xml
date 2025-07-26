@@ -11,7 +11,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -26,7 +26,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -41,7 +41,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -56,7 +56,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="11"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -71,7 +71,7 @@
         <parameter name="os" value="Windows"/>
         <parameter name="osVersion" value="10"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -86,7 +86,7 @@
         <parameter name="os" value="OS X"/>
         <parameter name="osVersion" value="Monterey"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -101,7 +101,7 @@
         <parameter name="os" value="OS X"/>
         <parameter name="osVersion" value="Monterey"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -116,7 +116,7 @@
         <parameter name="os" value="OS X"/>
         <parameter name="osVersion" value="Ventura"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -131,7 +131,7 @@
         <parameter name="os" value="android"/>
         <parameter name="osVersion" value="13.0"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -146,7 +146,7 @@
         <parameter name="os" value="android"/>
         <parameter name="osVersion" value="13.0"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -161,7 +161,7 @@
         <parameter name="os" value="android"/>
         <parameter name="osVersion" value="13.0"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -176,7 +176,7 @@
         <parameter name="os" value="ios"/>
         <parameter name="osVersion" value="16"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -191,7 +191,7 @@
         <parameter name="os" value="ios"/>
         <parameter name="osVersion" value="15"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -206,7 +206,7 @@
         <parameter name="os" value="android"/>
         <parameter name="osVersion" value="12.0"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -221,7 +221,7 @@
         <parameter name="os" value="ios"/>
         <parameter name="osVersion" value="16"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
@@ -236,7 +236,7 @@
         <parameter name="os" value="ios"/>
         <parameter name="osVersion" value="15"/>
         <classes>
-            <class name="tests.LoginTest">
+            <class name="tests.CriticalLoginTest">
                 <methods>
                     <include name="testSuccessfulLogin"/>
                 </methods>
