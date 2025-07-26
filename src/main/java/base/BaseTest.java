@@ -1,0 +1,74 @@
+package base;
+
+import config.BrowserStackSDKConfig;
+import config.ConfigManager;
+import org.testng.annotations.*;
+import utils.WebDriverFactory;
+import org.openqa.selenium.WebDriver;
+
+/**
+ * Base test class containing common setup and teardown methods
+ */
+public abstract class BaseTest {
+    
+    protected WebDriver driver;
+    protected String browser;
+    protected String os;
+    protected String osVersion;
+    
+    @BeforeSuite(alwaysRun = true)
+    public void suiteSetup() {
+        // Initialize BrowserStack SDK configuration for Test Observability
+        BrowserStackSDKConfig.initialize();
+        
+        // Verify BrowserStack credentials if running on BrowserStack
+        String environment = System.getProperty("environment", "local");
+        if ("browserstack".equalsIgnoreCase(environment)) {
+            BrowserStackSDKConfig.verifyCredentials();
+        }
+    }
+    
+    @Parameters({"browser", "os", "osVersion"})
+    @BeforeMethod(alwaysRun = true)
+    public void setUp(@Optional("chrome") String browser, 
+                     @Optional("Windows") String os, 
+                     @Optional("11") String osVersion) {
+        
+        // Use system properties if available, otherwise use parameters from TestNG XML
+        this.browser = System.getProperty("browser", browser != null && !browser.isEmpty() ? browser : "chrome");
+        this.os = System.getProperty("os", os != null && !os.isEmpty() ? os : "Windows");
+        this.osVersion = System.getProperty("osVersion", osVersion != null && !osVersion.isEmpty() ? osVersion : "11");
+        
+        System.out.println("Setting up test with Browser: '" + this.browser + "', OS: '" + this.os + "', OSVersion: '" + this.osVersion + "'");
+        
+        // Create WebDriver instance
+        this.driver = WebDriverFactory.createDriver(browser, os, osVersion);
+        
+        // Navigate to application URL
+        String appUrl = ConfigManager.getAppUrl();
+        System.out.println("Navigating to: " + appUrl);
+        driver.get(appUrl);
+    }
+    
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        if (driver != null) {
+            System.out.println("Closing browser for: " + browser + " on " + os);
+            WebDriverFactory.quitDriver();
+        }
+    }
+    
+    /**
+     * Get the current WebDriver instance
+     */
+    protected WebDriver getDriver() {
+        return driver;
+    }
+    
+    /**
+     * Get test information as string
+     */
+    protected String getTestInfo() {
+        return String.format("Browser: %s, OS: %s %s", browser, os, osVersion);
+    }
+}

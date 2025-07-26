@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mobile Devices - BrowserStack Pro Plan" parallel="tests" thread-count="4" verbose="2">
+    
+    <parameter name="environment" value="browserstack"/>
+    
+    <!-- Mobile Device Tests - Batch 1 (4 devices to stay under 5 parallel limit) -->
+    <test name="Android_Samsung_Galaxy_S23_Chrome" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="device" value="Samsung Galaxy S23"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="13.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="iOS_iPhone_14_Pro_Max_Safari" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="device" value="iPhone 14 Pro Max"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="16"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Android_Google_Pixel_7_Chrome" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="device" value="Google Pixel 7"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="13.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="iOS_iPhone_13_Safari" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="device" value="iPhone 13"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="15"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

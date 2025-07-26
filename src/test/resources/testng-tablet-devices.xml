@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Tablet Devices - BrowserStack Pro Plan" parallel="tests" thread-count="4" verbose="2">
+    
+    <parameter name="environment" value="browserstack"/>
+    
+    <!-- Tablet Device Tests - Batch 1 (4 tablets to stay under 5 parallel limit) -->
+    <test name="Android_Samsung_Galaxy_Tab_S8_Chrome" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="device" value="Samsung Galaxy Tab S8"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="12.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="iOS_iPad_Pro_12_9_2022_Safari" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="device" value="iPad Pro 12.9 2022"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="16"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Android_Samsung_Galaxy_Tab_S7_Chrome" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="device" value="Samsung Galaxy Tab S7"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="11.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="iOS_iPad_Air_5_Safari" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="device" value="iPad Air 5"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="15"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

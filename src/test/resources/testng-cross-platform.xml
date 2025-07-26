@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cross-Platform Single Test Suite" parallel="tests" thread-count="10" verbose="2">
+    
+    <parameter name="environment" value="browserstack"/>
+    
+    <!-- Desktop Windows Chrome Latest -->
+    <test name="Windows_11_Chrome_Latest" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Desktop Windows Chrome 120 -->
+    <test name="Windows_11_Chrome_120" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browserVersion" value="120"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Desktop Windows Firefox Latest -->
+    <test name="Windows_11_Firefox_Latest" group-by-instances="true">
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Desktop Windows Edge Latest -->
+    <test name="Windows_11_Edge_Latest" group-by-instances="true">
+        <parameter name="browser" value="Edge"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Desktop Windows 10 Chrome -->
+    <test name="Windows_10_Chrome_Latest" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="10"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- macOS Safari Monterey -->
+    <test name="macOS_Monterey_Safari_Latest" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Monterey"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- macOS Chrome Monterey -->
+    <test name="macOS_Monterey_Chrome_Latest" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Monterey"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- macOS Safari Ventura -->
+    <test name="macOS_Ventura_Safari_Latest" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Ventura"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Android Samsung Galaxy S23 Chrome -->
+    <test name="Android_Samsung_Galaxy_S23_Chrome" group-by-instances="true">
+        <parameter name="device" value="Samsung Galaxy S23"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="13.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Android Samsung Galaxy S23 Samsung Browser -->
+    <test name="Android_Samsung_Galaxy_S23_Samsung_Browser" group-by-instances="true">
+        <parameter name="device" value="Samsung Galaxy S23"/>
+        <parameter name="browser" value="Samsung Browser"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="13.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Android Google Pixel 7 Chrome -->
+    <test name="Android_Google_Pixel_7_Chrome" group-by-instances="true">
+        <parameter name="device" value="Google Pixel 7"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="13.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- iOS iPhone 14 Pro Max Safari -->
+    <test name="iOS_iPhone_14_Pro_Max_Safari" group-by-instances="true">
+        <parameter name="device" value="iPhone 14 Pro Max"/>
+        <parameter name="browser" value="Safari"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="16"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- iOS iPhone 13 Safari -->
+    <test name="iOS_iPhone_13_Safari" group-by-instances="true">
+        <parameter name="device" value="iPhone 13"/>
+        <parameter name="browser" value="Safari"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="15"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- Android Tablet Samsung Galaxy Tab S8 -->
+    <test name="Android_Samsung_Galaxy_Tab_S8_Chrome" group-by-instances="true">
+        <parameter name="device" value="Samsung Galaxy Tab S8"/>
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="os" value="android"/>
+        <parameter name="osVersion" value="12.0"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- iPad Pro 12.9 2022 Safari -->
+    <test name="iOS_iPad_Pro_12_9_2022_Safari" group-by-instances="true">
+        <parameter name="device" value="iPad Pro 12.9 2022"/>
+        <parameter name="browser" value="Safari"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="16"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <!-- iPad Air 5 Safari -->
+    <test name="iOS_iPad_Air_5_Safari" group-by-instances="true">
+        <parameter name="device" value="iPad Air 5"/>
+        <parameter name="browser" value="Safari"/>
+        <parameter name="os" value="ios"/>
+        <parameter name="osVersion" value="15"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

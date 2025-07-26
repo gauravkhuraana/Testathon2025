@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Browser Compatibility - BrowserStack Pro Plan" parallel="tests" thread-count="4" verbose="2">
+    
+    <parameter name="environment" value="browserstack"/>
+    
+    <!-- Cross-Browser Tests - Different versions for compatibility testing -->
+    <test name="Windows_Chrome_Version_120" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="browserVersion" value="120"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Windows_Firefox_Version_121" group-by-instances="true">
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="browserVersion" value="121"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="Windows_Edge_Latest" group-by-instances="true">
+        <parameter name="browser" value="Edge"/>
+        <parameter name="browserVersion" value="latest"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    
+    <test name="macOS_Big_Sur_Safari_15" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="browserVersion" value="15"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Big Sur"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

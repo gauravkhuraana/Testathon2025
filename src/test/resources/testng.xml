@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BrowserStack Selenium Test Suite" parallel="tests" thread-count="4" verbose="2">
+    
+    <parameter name="environment" value="browserstack"/>
+    
+    <!-- TestNG Listeners - Disabled for BrowserStack observability compatibility -->
+    <!--
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.ExtentReportListener"/>
+    </listeners>
+    -->
+    
+    <!-- Smoke Test Suite -->
+    <test name="Chrome Windows Tests" group-by-instances="true">
+        <parameter name="browser" value="Chrome"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        
+        <groups>
+            <run>
+                <include name="smoke"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.ProductTest"/>
+            <class name="tests.CheckoutTest"/>
+        </classes>
+    </test>
+    
+    <!-- Firefox Tests -->
+    <test name="Firefox Windows Tests" group-by-instances="true">
+        <parameter name="browser" value="Firefox"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.ProductTest"/>
+        </classes>
+    </test>
+    
+    <!-- Safari Tests -->
+    <test name="Safari macOS Tests" group-by-instances="true">
+        <parameter name="browser" value="Safari"/>
+        <parameter name="os" value="OS X"/>
+        <parameter name="osVersion" value="Monterey"/>
+        
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="tests.LoginTest"/>
+        </classes>
+    </test>
+    
+    <!-- Test Listeners - Disabled for BrowserStack observability compatibility -->
+    <!--
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.ExtentReportListener"/>
+    </listeners>
+    -->
+    
+</suite>

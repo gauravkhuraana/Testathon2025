@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Local Test Suite" parallel="tests" thread-count="1" verbose="2">
+    
+    <parameter name="environment" value="local"/>
+    
+    <!-- Local Chrome Test -->
+    <test name="Local Chrome Tests" group-by-instances="true">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="os" value="Windows"/>
+        <parameter name="osVersion" value="11"/>
+        
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.ProductTest"/>
+            <class name="tests.CheckoutTest"/>
+        </classes>
+    </test>
+    
+    <!-- Test Listeners - Disabled for BrowserStack observability compatibility -->
+    <!--
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.ExtentReportListener"/>
+    </listeners>
+    -->
+    
+</suite>
