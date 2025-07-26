@@ -1,7 +1,17 @@
 # Selenium BrowserStack Automation Framework
 
+# please check out this 
+--> https://youtu.be/jtxF3OWHpsw
+
+
+## Test Plan
+![Test Plan](testplan.jpeg)
+
 ## Overview
 This is a comprehensive Java-based Selenium automation framework designed for cross-browser testing using BrowserStack SDK. The framework uses TestNG for test execution with parallel execution capabilities and Maven for dependency management.
+
+
+
 
 ## Framework Architecture
 

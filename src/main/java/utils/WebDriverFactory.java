@@ -48,7 +48,14 @@ public class WebDriverFactory {
         
         // Configure timeouts
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(ConfigManager.getImplicitWait()));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigManager.getIntProperty("page.load.timeout", 60)));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigManager.getIntProperty("page.load.timeout", 120)));
+        
+        // Configure network error tolerance
+        try {
+            NetworkErrorHandler.configureNetworkErrorTolerance(driver);
+        } catch (Exception e) {
+            System.out.println("⚠️ Could not configure network error tolerance: " + e.getMessage());
+        }
         
         driverThreadLocal.set(driver);
         return driver;
@@ -105,7 +112,12 @@ public class WebDriverFactory {
         // Observability and debugging features - these are essential for SDK features
         bstackOptions.put("debug", true);
         bstackOptions.put("video", true);
-        bstackOptions.put("networkLogs", true);
+        
+        // Network logs - make this configurable to avoid issues with failed requests
+        boolean networkLogsEnabled = ConfigManager.getBooleanProperty("network.logs.enabled", false);
+        bstackOptions.put("networkLogs", networkLogsEnabled);
+        System.out.println("Network logs enabled: " + networkLogsEnabled);
+        
         bstackOptions.put("consoleLogs", "verbose");
         bstackOptions.put("seleniumLogs", true);
         

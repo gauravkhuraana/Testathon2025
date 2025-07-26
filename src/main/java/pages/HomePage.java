@@ -19,22 +19,22 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//div[contains(@class, 'bag')]")
     private WebElement cartIcon;
     
-    @FindBy(xpath = "//div[text()='25 Product(s) found.']")
+    @FindBy(className = "products-found")
     private WebElement productCountText;
     
     // Locators using By selectors for testathon.live  
     private final By signInButtonLocator = By.linkText("Sign In");
-    private final By productGridLocator = By.xpath("//div[contains(text(), 'Product(s) found')]");
+    private final By productGridLocator = By.className("products-found"); // Updated - uses class name
     private final By addToCartButtonLocator = By.xpath("//div[text()='Add to cart']");
     private final By cartBadgeLocator = By.xpath("//div[contains(@class, 'badge')]");
-    private final By productItemsLocator = By.xpath("//div[contains(@class, 'product-item')]");
-    private final By vendorFiltersLocator = By.xpath("//div[text()='Vendors:']");
+    private final By productItemsLocator = By.xpath("//div[contains(@class, 'shelf-item')]"); // Updated - more specific
+    private final By vendorFiltersLocator = By.xpath("//h4[contains(text(), 'Vendor')]"); // Updated - correct tag
     
-    // Vendor filter locators
-    private final By appleFilterLocator = By.xpath("//div[text()='Apple']/preceding-sibling::input[@type='checkbox']");
-    private final By samsungFilterLocator = By.xpath("//div[text()='Samsung']/preceding-sibling::input[@type='checkbox']");
-    private final By googleFilterLocator = By.xpath("//div[text()='Google']/preceding-sibling::input[@type='checkbox']");
-    private final By onePlusFilterLocator = By.xpath("//div[text()='OnePlus']/preceding-sibling::input[@type='checkbox']");
+    // Vendor filter locators - Updated based on actual HTML structure
+    private final By appleFilterLocator = By.xpath("//input[@type='checkbox'][@value='Apple']");
+    private final By samsungFilterLocator = By.xpath("//input[@type='checkbox'][@value='Samsung']");
+    private final By googleFilterLocator = By.xpath("//input[@type='checkbox'][@value='Google']");
+    private final By onePlusFilterLocator = By.xpath("//input[@type='checkbox'][@value='OnePlus']");
     
     public HomePage(WebDriver driver) {
         super(driver);
@@ -66,17 +66,47 @@ public class HomePage extends BasePage {
      * Get number of products displayed
      */
     public int getProductCount() {
-        SeleniumUtils.waitForElementVisible(driver, productGridLocator);
-        String productText = SeleniumUtils.getTextSafely(driver, productGridLocator);
-        // Extract number from text like "25 Product(s) found."
-        String[] parts = productText.split(" ");
-        if (parts.length > 0) {
-            try {
-                return Integer.parseInt(parts[0]);
-            } catch (NumberFormatException e) {
-                System.out.println("Could not parse product count from: " + productText);
-                return 0;
+        try {
+            // Try multiple locators for product count
+            By[] productCountLocators = {
+                By.className("products-found"),
+                By.xpath("//small[contains(text(), 'Product(s) found')]"),
+                By.xpath("//div[contains(@class, 'shelf-container-header')]"),
+                By.xpath("//*[contains(text(), 'Product(s) found')]")
+            };
+            
+            WebElement productCountElement = null;
+            for (By locator : productCountLocators) {
+                try {
+                    productCountElement = SeleniumUtils.waitForElementVisible(driver, locator, 5);
+                    if (productCountElement != null) {
+                        System.out.println("✅ Found product count using locator: " + locator);
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("⚠️ Locator failed: " + locator + " - " + e.getMessage());
+                }
             }
+            
+            if (productCountElement != null) {
+                String productText = productCountElement.getText();
+                System.out.println("Product count text: " + productText);
+                
+                // Extract number from text like "25 Product(s) found."
+                String[] parts = productText.split(" ");
+                if (parts.length > 0) {
+                    try {
+                        return Integer.parseInt(parts[0]);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Could not parse product count from: " + productText);
+                        return 0;
+                    }
+                }
+            } else {
+                System.out.println("❌ Could not find product count element with any locator");
+            }
+        } catch (Exception e) {
+            System.out.println("❌ Error getting product count: " + e.getMessage());
         }
         return 0;
     }
@@ -141,12 +171,30 @@ public class HomePage extends BasePage {
     }
     
     /**
-     * Apply filter (if available)
+     * Apply vendor filter by brand name
      */
     public void applyFilter(String filterType) {
-        By filterLocator = By.xpath(String.format("//span[contains(text(), '%s')]", filterType));
-        if (verifyElementDisplayed(filterLocator)) {
-            safeClickWithWait(filterLocator);
+        try {
+            // Use checkbox value-based locator for vendor filters
+            By filterLocator = By.xpath(String.format("//input[@type='checkbox'][@value='%s']", filterType));
+            
+            if (verifyElementDisplayed(filterLocator)) {
+                safeClickWithWait(filterLocator);
+                System.out.println("✅ Applied filter: " + filterType);
+            } else {
+                System.out.println("⚠️ Filter not found or not available: " + filterType);
+                
+                // Fallback to span-based approach
+                By spanFilterLocator = By.xpath(String.format("//span[text()='%s']", filterType));
+                if (verifyElementDisplayed(spanFilterLocator)) {
+                    safeClickWithWait(spanFilterLocator);
+                    System.out.println("✅ Applied filter using span: " + filterType);
+                } else {
+                    System.out.println("❌ Filter not available: " + filterType);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("❌ Error applying filter " + filterType + ": " + e.getMessage());
         }
     }
     

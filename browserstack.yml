@@ -35,7 +35,7 @@ projectName: "Java Selenium BrowserStack Framework"
 # Observability and Debugging
 debug: true
 video: true
-networkLogs: true
+networkLogs: false
 consoleLogs: verbose
 seleniumLogs: true
 testObservability: true

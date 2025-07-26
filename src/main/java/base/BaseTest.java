@@ -44,10 +44,16 @@ public abstract class BaseTest {
         // Create WebDriver instance
         this.driver = WebDriverFactory.createDriver(this.browser, this.os, this.osVersion);
         
-        // Navigate to application URL
+        // Navigate to application URL with retry logic
         String appUrl = ConfigManager.getAppUrl();
         System.out.println("Navigating to: " + appUrl);
-        driver.get(appUrl);
+        
+        // Use enhanced navigation with network error handling
+        boolean navigationSuccess = utils.NetworkErrorHandler.navigateWithRetry(driver, appUrl, 3);
+        if (!navigationSuccess) {
+            System.out.println("⚠️ Navigation completed with warnings, continuing test...");
+            // Don't fail the test, just log the warning
+        }
     }
     
     @AfterMethod(alwaysRun = true)

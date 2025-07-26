@@ -42,7 +42,7 @@ public class NetworkErrorHandler {
      */
     public static void clearConsoleLogs(WebDriver driver) {
         try {
-            driver.manage().logs().get(LogType.BROWSER);
+            driver.manage().logs().get(LogType.BROWSER).getAll();
         } catch (Exception e) {
             // Ignore if logs are not available
             System.out.println("Console logs not available: " + e.getMessage());
@@ -54,7 +54,7 @@ public class NetworkErrorHandler {
      */
     public static boolean hasCriticalJavaScriptErrors(WebDriver driver) {
         try {
-            List<LogEntry> logs = driver.manage().logs().get(LogType.BROWSER);
+            List<LogEntry> logs = driver.manage().logs().get(LogType.BROWSER).getAll();
             
             for (LogEntry log : logs) {
                 String message = log.getMessage().toLowerCase();

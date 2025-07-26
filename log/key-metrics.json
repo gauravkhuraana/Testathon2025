@@ -1,0 +1,57 @@
+[
+    {
+        "duration": 0.03620004653930664,
+        "eventName": "sdk:pre-test",
+        "startTime": 1362842841.0852,
+        "success": true,
+        "worker": 1,
+        "failure": null,
+        "details": null,
+        "entryType": "measure",
+        "platform": 0,
+        "command": null,
+        "testName": null,
+        "hookType": "",
+        "cli": false
+    },
+    {
+        "name": "sdk:testhub",
+        "entryType": "measure",
+        "startTime": 7050.55730009079,
+        "duration": 1068.1405999660492,
+        "detail": null,
+        "success": true,
+        "failure": null,
+        "worker": 31380
+    },
+    {
+        "name": "sdk:percy",
+        "entryType": "measure",
+        "startTime": 8134.580499887466,
+        "duration": 0.4651000499725342,
+        "detail": null,
+        "success": true,
+        "failure": null,
+        "worker": 31380
+    },
+    {
+        "name": "sdk:automate:local",
+        "entryType": "measure",
+        "startTime": 8135.276000022888,
+        "duration": 3.729599952697754,
+        "detail": null,
+        "success": true,
+        "failure": null,
+        "worker": 31380
+    },
+    {
+        "name": "sdk:automate:hub-management",
+        "entryType": "measure",
+        "startTime": 8630.49799990654,
+        "duration": 813.3207001686096,
+        "detail": null,
+        "success": true,
+        "failure": null,
+        "worker": 31380
+    }
+]
